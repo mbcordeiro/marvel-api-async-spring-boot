@@ -1,7 +1,6 @@
 package com.matheuscordeiro.marvelapiasyncservices.controllers;
 
 import com.matheuscordeiro.marvelapiasyncservices.dtos.CharacterDTO;
-import com.matheuscordeiro.marvelapiasyncservices.entities.Character;
 import com.matheuscordeiro.marvelapiasyncservices.services.interfaces.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharactersById(@PathVariable  Long id) {
+    public ResponseEntity<CharacterDTO> getCharactersById(@PathVariable  Long id) {
         return ResponseEntity.ok(characterService.findCharacter(id));
     }
 }
