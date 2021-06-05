@@ -1,7 +1,8 @@
 package com.matheuscordeiro.marvelapiasyncservices.services;
 
-import com.matheuscordeiro.marvelapiasyncservices.dtos.CharacterDTO;
+import com.matheuscordeiro.marvelapiasyncservices.models.CharacterData;
 import com.matheuscordeiro.marvelapiasyncservices.services.interfaces.MarvelService;
+import com.matheuscordeiro.marvelapiasyncservices.utils.UrlBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -22,21 +23,24 @@ public class MarvelServiceImpl implements MarvelService {
 
     @Async
     @Override
-    public CompletableFuture<CharacterDTO> findCharacter() throws InterruptedException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String url = stringBuilder.append(BASE_URL).append("characters").toString();
-        CharacterDTO characterDTO = restTemplate.getForObject(url, CharacterDTO.class);
+    public CompletableFuture<CharacterData> findCharacters() throws InterruptedException {
+        String url = UrlBuilder.urlBuilder(BASE_URL, "characters");
+        CharacterData data = restTemplate.getForObject(url, CharacterData.class);
+        LOGGER.info("Request is start");
         Thread.sleep(1000);
-        return CompletableFuture.completedFuture(characterDTO);
+        LOGGER.info("Request is done");
+        return CompletableFuture.completedFuture(data);
     }
 
     @Async
     @Override
-    public CompletableFuture<CharacterDTO> findCharacterById(Long id) throws InterruptedException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String url = stringBuilder.append(BASE_URL).append("characters/").append(id).toString();
-        CharacterDTO characterDTO = restTemplate.getForObject(url, CharacterDTO.class);
+    public CompletableFuture<CharacterData> findCharacterById(Long id) throws InterruptedException {
+        StringBuilder paramUrl = new StringBuilder();
+        String url = UrlBuilder.urlBuilder(BASE_URL, paramUrl.append("characters/").append(id).toString());
+        LOGGER.info("Request is start");
+        CharacterData data = restTemplate.getForObject(url, CharacterData.class);
         Thread.sleep(1000);
-        return CompletableFuture.completedFuture(characterDTO);
+        LOGGER.info("Request is done");
+        return CompletableFuture.completedFuture(data);
     }
 }

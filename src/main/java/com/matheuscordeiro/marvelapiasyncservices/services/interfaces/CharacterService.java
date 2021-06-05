@@ -1,12 +1,13 @@
 package com.matheuscordeiro.marvelapiasyncservices.services.interfaces;
 
 import com.matheuscordeiro.marvelapiasyncservices.dtos.CharacterDTO;
-import com.matheuscordeiro.marvelapiasyncservices.entities.Character;
+import com.matheuscordeiro.marvelapiasyncservices.models.CharacterData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface CharacterService {
-    List<CharacterDTO> findAllCharacters();
+    List<CharacterData> findAllCharacters() throws InterruptedException, ExecutionException;
 
-    CharacterDTO findCharacter(Long id);
+    CharacterData findCharacterById(Long id) throws InterruptedException, ExecutionException;
 }
