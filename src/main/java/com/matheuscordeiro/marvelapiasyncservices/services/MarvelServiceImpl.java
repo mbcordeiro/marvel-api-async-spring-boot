@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
 
+@Service
 public class MarvelServiceImpl implements MarvelService {
     private static final Logger LOGGER = LoggerFactory.getLogger(MarvelService.class);
     private static final String BASE_URL = "http://gateway.marvel.com/v1/public/";
@@ -25,6 +27,8 @@ public class MarvelServiceImpl implements MarvelService {
     @Override
     public CompletableFuture<CharacterData> findCharacters() throws InterruptedException {
         String url = UrlBuilder.urlBuilder(BASE_URL, "characters");
+        LOGGER.debug("Amigo estou aqui => " + url);
+        LOGGER.info("Amigo estou aqui => " + url);
         CharacterData data = restTemplate.getForObject(url, CharacterData.class);
         LOGGER.info("Request is start");
         Thread.sleep(1000);
@@ -37,6 +41,8 @@ public class MarvelServiceImpl implements MarvelService {
     public CompletableFuture<CharacterData> findCharacterById(Long id) throws InterruptedException {
         StringBuilder paramUrl = new StringBuilder();
         String url = UrlBuilder.urlBuilder(BASE_URL, paramUrl.append("characters/").append(id).toString());
+        LOGGER.debug("Amigo estou aqui => " + url);
+        LOGGER.info("Amigo estou aqui => " + url);
         LOGGER.info("Request is start");
         CharacterData data = restTemplate.getForObject(url, CharacterData.class);
         Thread.sleep(1000);

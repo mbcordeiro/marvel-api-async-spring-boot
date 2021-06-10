@@ -6,8 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 public class UrlBuilder {
-    private static final String PUBLIC_KEY = "Your public key";
-    private static final String PRIVATE_KEY = "Your private key";
+    private static final String PUBLIC_KEY = "301366f0ad66d4e9ca72687054826857";
+    private static final String PRIVATE_KEY = "7c1e6340ae489f2f44712b157c82565be43faf9e";
 
     private static Instant instant = Instant.now();
     public static long timeStamp = instant.toEpochMilli();
